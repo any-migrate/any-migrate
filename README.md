@@ -1,7 +1,7 @@
 any-migrate
 ===========
 
-A generic system migrator.
+A generic data migrator.
 
 **Status**: Planning
 
