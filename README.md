@@ -62,8 +62,6 @@ states:
 | `NEW`                       | Unapplied migration.                                       |
 | `TESTING`                   | The migration is being tested if it looks sane.            |
 | `TESTING_FAILED`            | `TESTING` failed.                                          |
-| `PRE_REVERT_TESTING`        | The revert is being tested if it looks sane.               |
-| `PRE_REVERT_TESTING_FAILED` | The `PRE_REVERT_TESTING` failed.                           |
 | `MIGRATING`                 | The migration is being applied.                            |
 | `MIGRATION_FAILED`          | The migration failed.                                      |
 | `VERIFYING`                 | The migration is verifying that the migration was correct. |
@@ -92,14 +90,12 @@ The following state transitions exist:
 |------|---------------|-------------------|
 | migrate | `NEW` | `TESTING` |
 | fail-testing | `TESTING` | `TESTING_FAILED` |
-| check-revert | `TESTING`  | `PRE_REVERT_TESTING` |
-| fail-revert-check | `PRE_REVERT_TESTING` | `PRE_REVERT_TESTING_FAILED` |
-| execute-migration | `PRE_REVERT_TESTING` | `MIGRATING` |
+| execute-migration | `TESTING` | `MIGRATING` |
 | fail-migration | `MIGRATING` | `MIGRATION_FAILED` |
 | verify-migration | `MIGRATING` | `VERIFYING`
 | fail-verification | `VERIFYING` | `VERIFICATION_FAILED` |
 | succeed-migration | `VERIFYING` | `MIGRATION_SUCCEEDED` |
-| retry-migration | `TESTING_FAILED`, `PRE_REVERT_TESTING_FAILED`, `MIGRATION_FAILED`, `VERIFICATION_FAILED` | `TESTING` |
+| retry-migration | `TESTING_FAILED`, `MIGRATION_FAILED`, `VERIFICATION_FAILED` | `TESTING` |
 | revert-migration | `MIGRATION_SUCCEEDED` | `REVERT_TESTING` |
 | fail-revert-testing | `REVERT_TESTING` | `REVERT_TESTING_FAILED` |
 | execute-revert | `REVERT_TESTING` | `REVERT_MIGRATING` |
