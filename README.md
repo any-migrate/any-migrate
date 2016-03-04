@@ -36,7 +36,7 @@ of users, populate complex data, or other one-off tasks you'd like to execute.
    * On disk (mostly used for testing - make sure to backups!).
    * RDBM (MySQL/PostgresQL).
    * Cassandra.
- * Pluggable system for migration "migrators". Examples will be:
+ * Pluggable system for migration _migrators_. Examples will be:
    * Executing a script.
    * Executing an SQL command on a server.
    * Executing shell command.
@@ -119,10 +119,10 @@ $ go install github.com/any-migrate/mysql-migrator
 ```
 
 `any-migrate` is the command line utility that you'll use to interact with
-any-migrate. A "repository" is a plugin which is used for keeping track of
-which migrations have been applied. The "file" stores this informtion in a
-plain file. A migrator is a plugin which applies changes. The "mysql" plugin
-applies changes to a MySQL database.
+any-migrate. A _repository is a plugin which is used for keeping track of which
+migrations have been applied. The _file_ repository plugin stores this
+information in a plain file. A _migrator_ is a plugin which applies changes. The
+_mysql_ plugin applies changes to a MySQL database.
 
 Then create a configuration (YAML file):
 
