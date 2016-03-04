@@ -113,9 +113,7 @@ environment variable to a directory where you'd like to install the binaries.
 You can then install the binaries needed for this example by issuing
 
 ```bash
-$ go install github.com/any-migrate/any-migrate
-$ go install github.com/any-migrate/file-repository
-$ go install github.com/any-migrate/mysql-migrator
+$ go install github.com/any-migrate/any-migrate/...
 ```
 
 `any-migrate` is the command line utility that you'll use to interact with
