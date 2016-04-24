@@ -154,11 +154,11 @@ sources:
 and execute `mkdir my.changes` to create the directory where we will store our
 migrations.
 
-Now, let's run our first migrations! Create the following files:
+Now, let's create and run our first migrations! Create the following files:
 
 ```yaml
 # my.changes/01create_database.migration
-# `source` is optional if only a single source is defined.
+# `source` is optional if only a single source is defined in `my.config`.
 source: mysql
 action:
   type: create database
