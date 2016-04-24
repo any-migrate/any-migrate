@@ -117,10 +117,10 @@ $ go install github.com/any-migrate/any-migrate/...
 ```
 
 `any-migrate` is the command line utility that you'll use to interact with
-any-migrate. A _repository is a plugin which is used for keeping track of which
-migrations have been applied. The _file_ repository plugin stores this
-information in a plain file. A _migrator_ is a plugin which applies changes. The
-_mysql_ plugin applies changes to a MySQL database.
+any-migrate. A _repository_ is a plugin which is used for keeping track of
+which migrations have been applied. The _file_ repository plugin stores this
+information in a plain file. A _migrator_ is a plugin which applies changes.
+The _mysql_ plugin applies changes to a MySQL database.
 
 Then create a configuration (YAML file):
 
@@ -139,7 +139,8 @@ sources:
     database: test_db
 ```
 
-and execute `mkdir my.changes` to create the directory where we will store our migrations.
+and execute `mkdir my.changes` to create the directory where we will store our
+migrations.
 
 Now, let's run our first migrations! Create the following files:
 
