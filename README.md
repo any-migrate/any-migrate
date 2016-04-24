@@ -8,38 +8,50 @@ A generic data migrator.
 Rationale
 ---------
 
-For proper continuous integration (CI) or continuous delivery (CD), many people
-use a database schema migration tool. The general idea is to versionize and
-codify migrations to make deployments repeatable, revertable, testable and
-automated.
+For proper continuous integration (CI) or continuous delivery (CD), many teams
+use a database schema migration tool. Such tool makes it possible to versionize
+and codify database schema changes to make deployments repeatable, revertable,
+testable and automated. The general approach to do this is by
 
-Database schema migrations tools generally supports versioning of schemas and
-applies schema changes to a database. They also keep track of every change
-applied to a system. Sadly, most schema migration tools are only dealing with
-SQL. This limits them to very basic migrations such as adding/deleting fields
-or updating a value of some field.
+ * versioning database (table) schemas by defining ordered schema changes/deltas; and
+ * as-needed applying these changes in a specific order. Bringing the database
+   to the latest schema version is generally an
+   [idempotent](https://en.wikipedia.org/wiki/Idempotence) operation. To
+   support idenpotency, some tools keep track of every change applied in a
+   database of its own.
 
-Occasionally simple SQL executions aren't enough. The migration might be more
-complex than that and you want to execute a script. The script could clean up
-your database, execute `pt-schema-migrate` (for MySQL), do complex migrations
-of users, populate complex data, or other one-off tasks you'd like to execute.
-`any-migrate` is a tool aiming to support custom data migrations.
+[Most](http://migrate4j.sourceforge.net/)
+[schema](https://liquibase.jira.com/wiki/display/CONTRIB/Available+Extensions)
+[migration](https://flywaydb.org) [tools](http://www.mybatis.org/migrations/)
+[are](https://bitbucket.org/liamstask/goose) tied to the low-level concept of a
+database and very specific interfaces, such as SQL. This often limits them to
+very basic data migrations such as creating/dropping a table, adding/deleting fields
+or updating a value of some field. At its best they support custom SQL.
+
+Unfortunately, simple SQL executions aren't always enough when migrating
+application state. A deploy might require a more complex data migration than an
+SQL execution; maybe you want to run a script, or support migrating a NoSQL
+database of some kind. The script could clean up your database, execute
+[`pt-online-schema-change`](https://www.percona.com/doc/percona-toolkit/2.1/pt-online-schema-change.html)
+(for MySQL), do complex migrations of users, populate complex data, or other
+one-off tasks you'd like to execute. `any-migrate` is a tool aiming to support
+custom data migrations.
 
 `any-migrate` will have the following features:
 
- * It keeps track of which migrations has been executed on a system.
- * Fails as early as possible.
- * Ask before assuming something. Explicitness is important. No magic.
+ * Keeps track of which migrations has been executed on a system.
+ * Fail early. Better safe than sorry.
+ * Asks, doesn't assume. Explicitness is important. No magic.
  * Verifies every change as much as possible before actual execution.
  * Support dry-run mode.
- * Pluggable storage of which version have been applied. Examples are:
-   * On disk (mostly used for testing - make sure to backups!).
+ * Pluggable storage _repositories_ of which version have been applied.
+   Examples are:
+   * On disk (mostly used for testing - make sure to backup!).
    * RDBM (MySQL/PostgresQL).
-   * Cassandra.
- * Pluggable system for migration _migrators_. Examples will be:
+ * Pluggable system for migration _migrators_. Examples are:
    * Executing a script.
-   * Executing an SQL command on a server.
-   * Executing shell command.
+   * Executing an SQL query on a server.
+   * Executing a shell command.
  * Easy deployment. Written in [Go](https://golang.org). Application, and
    plugins, compiles to statically linked binaries. No JVM, Python, node.js or
    Ruby environment and third party libraries required.
