@@ -23,10 +23,11 @@ testable and automated. The general approach to do this is by
 [Most](http://migrate4j.sourceforge.net/)
 [schema](https://liquibase.jira.com/wiki/display/CONTRIB/Available+Extensions)
 [migration](https://flywaydb.org) [tools](http://www.mybatis.org/migrations/)
-[are](https://bitbucket.org/liamstask/goose) tied to the low-level concept of a
-database and very specific interfaces, such as SQL. This often limits them to
-very basic data migrations such as creating/dropping a table, adding/deleting fields
-or updating a value of some field. At its best they support custom SQL.
+[are](https://bitbucket.org/liamstask/goose) [tied](http://sqitch.org) to the
+low-level concept of a database and very specific interfaces, such as SQL. This
+often limits them to very basic data migrations such as creating/dropping a
+table, adding/deleting fields or updating a value of some field. At its best
+they support custom SQL.
 
 Unfortunately, simple SQL executions aren't always enough when migrating
 application state. A deploy might require a more complex data migration than an
