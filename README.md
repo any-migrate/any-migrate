@@ -177,7 +177,7 @@ action:
     name: age
     specification: INT DEFAULT NULL
 ```
-. Each version must be an incremented integer numered from 1. Gaps in versions
+. Each version must be an incremented integer numbered from 1. Gaps in versions
 are not allowed.
 
 The migration setup can be tested by executing
